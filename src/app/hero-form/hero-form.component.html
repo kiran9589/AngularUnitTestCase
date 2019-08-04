@@ -1,0 +1,34 @@
+<div class="header">
+  <h4 class="back-to-list" routerLink="/" routerLinkActive="active">
+    <i class="fa fa-arrow-left"></i> Heroes List
+  </h4>
+</div>
+<form class="heroes-form" [formGroup]="heroFom" (ngSubmit)="createHero()">
+  <h1>Hero Form</h1>
+  <mat-form-field class="first-name">
+    <input matInput formControlName="firstName" placeholder="First Name" required>
+  <mat-error *ngIf="heroFom.hasError(firstName)">First name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="last-name">
+    <input matInput formControlName="lastName" placeholder="Last Name" required>
+<mat-error *ngIf="heroFom.hasError(lastName)">Last name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="DOB" [matDatepicker]="picker" placeholder="Date of Birth"  required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  <mat-error *ngIf="heroFom.hasError(DOB)">Date of birth is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="contact">
+    <input matInput type="number" formControlName="contact" placeholder="Contact"
+     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" required>
+     <mat-error *ngIf="heroFom.hasError(contact)">Contact number is required</mat-error>
+  </mat-form-field>
+  <div align="right">
+    <button class="create-button" mat-flat-button color="primary" [disabled]="!this.heroFom.valid">Create a Hero</button>
+  </div>
+  
+</form>
